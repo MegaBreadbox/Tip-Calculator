@@ -20,6 +20,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -74,7 +75,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun TipTimeLayout() {
+fun TipTimeLayout() {
     var amountInput by remember{ mutableStateOf("") }
     //Could also write it like amountInput = mutableStateOf("0") due to type inference
     //Originally written: amountInput: MutableState<String> = mutableState..
@@ -190,7 +191,8 @@ private fun RoundTheTipRow(
  * according to the local currency.
  * Example would be "$10.00".
  */
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double = 15.0,
     roundUp: Boolean
